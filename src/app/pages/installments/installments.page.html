@@ -1,0 +1,184 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios" class="py-2 px-2  header">
+
+    <ion-searchbar  slot="end" style="text-align: left;" class="searchbar" type="animated"></ion-searchbar>
+
+    <ion-button fill="clear" color="light" (click)="home()" class="backinstallment">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      Back
+    </ion-button>
+
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-icon class="buttonrefresh" name="menu-outline"></ion-icon>
+      </ion-menu-toggle>
+    </ion-buttons>
+
+    <ion-title class="pagetitle">
+     Add Installments
+    </ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-list class="listheader3" style="margin-top: 10px;">
+    <div class="">
+      <ion-row>
+        <ion-col size-lg="10.9" size-md="10" size="12" class="colhome">
+          <div class="me-auto  d-lg-block">
+            <!-- <h2 class="text-black font-w600">Property</h2> -->
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active text1 " (click)="home()">Home</li>
+              <li class="breadcrumb-item li1 page">Add Installment</li>
+            </ol>
+          </div>
+        </ion-col>
+        <!-- <ion-col size-lg="1" size-md="1.7" size=""  (click)="refresh()">
+          <a  class="btn btn-primary top  rounded primary1 light">
+            Refresh
+          </a>
+        </ion-col> -->
+      </ion-row>
+    </div>
+  </ion-list>
+
+  <div >
+    <ion-list class="selectlist">
+      <!-- <ion-item> -->
+        <!-- <ion-select  class="w-100" placeholder="Select Student"  
+        (ionChange)="select_student($event)" >
+          <ion-select-option *ngFor="let allStudent of All_Students"  value=" {{allStudent.id}}" >{{allStudent.name}}</ion-select-option>
+        </ion-select> -->
+        <!-- <ion-input type="text" placeholder="Search Student" (ionChange)="select_student($event)"></ion-input> -->
+        <ng-select bindLabel="name"
+        placeholder="Select Student"
+        appendTo="body"
+        [searchable]="true" 
+          (change)="select_student($event)">
+        <ng-option  *ngFor="let allStudent of All_Students" value="{{allStudent.id}}">
+          {{allStudent.name}}
+        </ng-option>
+        </ng-select>
+      <!-- </ion-item> -->
+
+    </ion-list>
+  </div>
+
+<div *ngIf="show">
+  <ion-list>
+  <ion-card style="border-radius: 8px;">
+    <ion-row>
+      <ion-col size-lg="4" size-md="4" size="12">
+        <ion-label>Student Name</ion-label>
+        <p class="text2">{{student_details.name}} </p>
+      </ion-col>
+      <ion-col size-lg="4" size-md="4"  size="12">
+        <ion-label>Contact No</ion-label>
+        <p  class="text2">{{student_details.contact_no}}</p>
+      </ion-col>
+      <ion-col size-lg="4" size-md="4"  size="12">
+        <ion-label>Course Duration</ion-label>
+        <p  class="text2">{{student_details.c_duration}}</p>
+      </ion-col>
+      <ion-col size-lg="4" size-md="4"  size="12">
+        <ion-label>Total Fee</ion-label>
+        <p  class="text2">{{student_details.total_fee}}</p>
+      </ion-col>
+      <ion-col size-lg="4" size-md="4"  size="12">
+        <ion-label>Remaining Fee</ion-label>
+        <p  class="text2">{{student_details.remaning_payment}}</p>
+      </ion-col>
+      <ion-col size-lg="4" size-md="4"  size="12">
+        <ion-label>Course</ion-label>
+        <p  class="text2">{{student_details.course}}</p>
+      </ion-col>
+      <ion-col size-lg="4" size-md="4"  size="12">
+        <ion-label>Total Installments</ion-label>
+        <p  class="text2">{{student_details.installment_no}}</p>
+      </ion-col>
+      <ion-col size-lg="4" size-md="4"  size="12">
+        <ion-label> Last Installment Date </ion-label>
+        <p  class="text2">{{student_details.date}}</p>
+      </ion-col>
+      <!-- <ion-col size-lg="4" size-md="4"  size="12">
+        <ion-label>Last Installment Amount</ion-label>
+        <p  class="text2">{{detail.i_amount}}</p>
+      </ion-col> -->
+      <ion-col size-lg="4" size-md="4"  size="12">
+        <ion-label>See All Installments</ion-label>
+        <!-- <p  class="text2">{{student_details.c_duration}}</p> -->
+        <p (click)="view_all_installment(student_details)" ><span class="color_primary"><ion-button>View</ion-button> </span> </p>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-list>
+</div>
+<ion-card class="card2"style="border-radius: 8px;">
+  <ion-row >
+    <div class="d-flex">
+    <h5 class="m-3">Current Installment no:</h5>
+    <h5 class="m-3 ms-1">{{current_instalment}}</h5>
+    </div>
+  </ion-row>
+  <ion-row >
+    <div class="d-flex">
+    <h5 class="m-3 text2">Pay Installment </h5>
+    <h5 class="m-3 ms-1"></h5>
+    </div>
+  </ion-row>
+  <div class="row d-flex justify-content-center align-items-center ion-margin">
+    <div class="col-lg-5 mb-2">
+      <div class="form-group">
+        <label class="text-label text2 label1">Installment Amount</label>
+        <ion-input  [(ngModel)]="student_installments.i_amount"  class="form-control" (ionChange)="installment($event)"  required></ion-input>
+      </div>
+    </div>
+      <div class="col-lg-5 mb-2">
+      <div class="form-group">
+        <label class="text-label text2 label1">Remaining Installment</label>
+        <ion-input  [(ngModel)]="student_installments.remaning_payment"  class="form-control"  required></ion-input>
+      </div>
+    </div>
+    <div class="col-lg-5 mb-2">
+      <div class="form-group">
+        <label class="text-label label1 text2">Intsallment Date</label>
+        <ion-input   type="date"  [(ngModel)]="this.student_installments.date" (ionChange)="month($event)"  class="form-control"  required></ion-input>
+      </div>
+    </div>
+    <div class="col-lg-5 mb-2">
+      <div class="form-group">
+        <label class="text-label label1 text2">Next Intsallment Date</label>
+        <ion-input   type="date"  [(ngModel)]="this.student_installments.upcoming_installment"   class="form-control"  required></ion-input>
+      </div>
+    </div>
+    <!-- <div class=" col-lg-5 mb-2">
+      <div class="form-group">
+        <label class="text-label label1">Month</label>
+        <ion-select   [(ngModel)]="student_installments.month"  placeholder="Select Month">
+          <ion-select-option value="january">January</ion-select-option>
+          <ion-select-option value="february">February</ion-select-option>
+          <ion-select-option value="march">March</ion-select-option>
+          <ion-select-option value="april">April</ion-select-option>
+          <ion-select-option value="may">May</ion-select-option>
+          <ion-select-option value="june">June</ion-select-option>
+          <ion-select-option value="july">July</ion-select-option>
+          <ion-select-option value="august">August</ion-select-option>
+          <ion-select-option value="september">September</ion-select-option>
+          <ion-select-option value="october">October</ion-select-option>
+          <ion-select-option value="november">November</ion-select-option>
+          <ion-select-option value="december">December</ion-select-option>
+        </ion-select>
+      </div>
+    </div> -->
+    <div class="col-lg-5 mb-2">
+      <ion-button expand="block" color="tertiary" (click)="Add_Installments()">
+        Pay Now
+      </ion-button>
+    </div>
+  </div>
+
+</ion-card>
+
+
+</ion-content>

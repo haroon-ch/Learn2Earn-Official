@@ -1,0 +1,159 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios" class="py-2 px-2  header">
+
+    <ion-searchbar  slot="end" style="text-align: left;" [(ngModel)]="filterTerm"  class="searchbar" type="animated"></ion-searchbar>
+
+    <ion-button fill="clear" color="light" (click)="home()" class="backbtn">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      Back
+    </ion-button>
+
+    
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-icon class="buttonrefresh" name="menu-outline"></ion-icon>
+      </ion-menu-toggle>
+    </ion-buttons>
+
+    <ion-title class="pagetitle">
+     See Students
+    </ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list class="listheader2" style="margin-top: 10px;">
+    <div class="">
+      <ion-row>
+        <ion-col size-lg="10.9" size-md="10" size="12" class="colhome">
+          <div class="me-auto  d-lg-block">
+            <!-- <h2 class="text-black font-w600">Property</h2> -->
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active text1 " (click)="home()">Home</li>
+              <li class="breadcrumb-item li1 page">See Students</li>
+              <!-- <li class="breadcrumb-item" (click)="Plot()"><a class="plot">Plot</a></li>
+              <li class="breadcrumb-item" (click)="add_plot()"><a class="page">Add Plot</a></li> -->
+            </ol>
+          </div>
+        </ion-col>
+        <ion-col size-lg="1" size-md="1.7" size="" (click)="refresh()">
+          <a  class="btn btn-primary top refresh_button rounded primary1 light me-3" *ngIf="!refresher">
+            Refresh
+          </a>
+          <ion-spinner color="tertiary" name="circles" *ngIf="refresher" style="margin-top: 10px;margin-left:10px;"></ion-spinner>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-list>
+
+  <ion-row>
+    <ion-col size-md="4" size="12" >
+      <div class="form-head ion-margin ">
+        <div class="me-auto w-100">
+          <div class="d-flex flex-column">
+            <h2 class="text-black mx-3 mt-4 mb-1 font-w600 page-titles">{{this.total}}</h2>
+            <h2 class="text-black mx-3 mb-4 mt-1 fs-5 font-w800">Total Students</h2>
+          </div>
+        </div> 
+      </div>
+    </ion-col>
+    <ion-col size-md="4" size="12">
+      <div class="form-head ion-margin ">
+        <div class="me-auto w-100">
+          <div class="d-flex flex-column">
+            <h2 class="text-black mx-3 mt-4 mb-1 font-w600 page-titles">{{this.activeCounter}}</h2>
+            <h2 class="text-black mx-3 mb-4 mt-1 fs-5 font-w800">Active Students</h2>
+          </div>
+        </div> 
+      </div>
+    </ion-col>
+    <ion-col size-md="4" size="12">
+      <div class="form-head ion-margin ">
+        <div class="me-auto w-100">
+          <div class="d-flex flex-column">
+            <h2 class="text-black mx-3 mt-4 mb-1 font-w600 page-titles">{{this.deactiveCounter}}</h2>
+            <h2 class="text-black mx-3 mb-4 mt-1 fs-5 font-w800">DeActive</h2>
+          </div>
+        </div> 
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <div >
+    <ion-list class="selectlist">
+      <ion-item>
+        <ion-select  class="w-100" placeholder="Select Student" 
+        (ionChange)="select_student_Course($event)" >
+          <ion-select-option value="all">All</ion-select-option>
+          <ion-select-option value="Full Stack Development">Full Stack Development</ion-select-option>
+          <ion-select-option value="Graphic Designing">Graphic Desgining</ion-select-option>
+          <ion-select-option value="Mobile App Development">Mobile App Development</ion-select-option>
+          <ion-select-option value="Web Development">Web Development</ion-select-option>
+          <!-- <ion-select-option value="active">Active Students</ion-select-option>
+          <ion-select-option value="deactive">Deactive Students</ion-select-option> -->
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-card style="border-radius: 8px;" class="card-body" >
+    <div class="card-body">
+                                        
+      <div class="table-responsive">
+          <table  class="table table-bordered align-middle nowrap">
+              <thead>
+                  <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Contact No</th>
+                      <th scope="col">Course</th>
+                      <th scope="col">Course Duration</th>
+                      <th scope="col">Student Status</th>
+                      <th scope="col">Fee Status</th>
+                      <th scope="col">Total Fee</th>
+                      <th scope="col">Monthly Installment</th>
+                      <th scope="col">Upcoming Installment</th>
+                      <th scope="col">Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let data of student_details | filter: filterTerm;let i=index;">
+                      <th scope="row">{{i+1}} </th>
+                      <td>{{data.name}}</td>       
+                      <td>{{data.contact_no}}</td>       
+                      <td>{{data.course}}</td>       
+                      <td>{{data.c_duration}}</td>            
+                      <td> <p [ngClass]="{'cancell':data.st_status === 'active','successfulll':data.st_status === 'deactive','pendingg':data.st_status === 'Cancel'}"style="margin:0px;"> {{data.st_status}}</p></td>       
+                      <td><p [ngClass]="{'pendingg':data.status === 'pending','cancell':data.status === 'confirim','successfulll':data.status === 'Successfull'}"style="margin:0px;">{{data.status}}</p></td>       
+                      <td>{{data.total_fee}}</td>            
+                      <td>{{data.per_installment}}</td>            
+                      <td>{{data.upcoming_installment}}</td>            
+                      <td>
+                        <ul class="list-unstyled hstack gap-1 mb-0" >
+                          <!-- <li printSectionId="demo" ngxPrint >
+                              <a  class="btn btn-sm btn-soft-primary"><ion-icon class="icon" name="eye-outline"></ion-icon></a>
+                          </li> -->
+                          <li (click)="seeDeatils(data)">
+                              <a  class="btn btn-sm btn-soft-primary"><ion-icon class="icon" name="eye-outline"></ion-icon></a>
+                          </li>
+                          <li (click)="view_all_installment(data)">
+                              <a  class="btn btn-sm btn-soft-primary"><ion-icon class="icon" name="cash-outline"></ion-icon></a>
+                          </li>
+                          <li (click)="updateModal(data)">
+                              <a class="btn btn-sm btn-soft-info"><ion-icon class="icon" name="create-outline"></ion-icon></a>
+                          </li>
+                          <!-- <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" (click)="DeleteStudent(data.id)">
+                              <a   data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><ion-icon class="icon" name="trash-outline"></ion-icon></a>
+                          </li> -->
+                      </ul>
+                      </td>       
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,204 @@
+<ion-header>
+    <ion-toolbar mode="ios" class="py-2 px-2  header">
+
+      <ion-searchbar  slot="end" style="text-align: left;"  [(ngModel)]="filterTerm" class="searchbar" type="animated"></ion-searchbar>
+  
+      <ion-button fill="clear" color="light" (click)="home()" class="backbtn">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        Back
+      </ion-button>
+  
+      <ion-buttons slot="start">
+        <ion-menu-toggle>
+          <ion-icon class="buttonrefresh" name="menu-outline"></ion-icon>
+        </ion-menu-toggle>
+      </ion-buttons>
+  
+      <ion-title class="pagetitle">
+       See Details
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list class="listheader2" style="margin-top: 10px;">
+    <div class="">
+      <ion-row>
+        <ion-col size-lg="10.9" size-md="10" size="12" class="colhome">
+          <div class="me-auto  d-lg-block">
+            <!-- <h2 class="text-black font-w600">Property</h2> -->
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active text1 " (click)="home()">Home</li>
+              <li class="breadcrumb-item li1 page">See Details</li>
+              <!-- <li class="breadcrumb-item" (click)="Plot()"><a class="plot">Plot</a></li>
+              <li class="breadcrumb-item" (click)="add_plot()"><a class="page">Add Plot</a></li> -->
+            </ol>
+          </div>
+        </ion-col>
+        <ion-col size-lg="1" size-md="1.7" size="" >
+          <a  class="btn btn-primary top rounded primary1 light me-3" *ngIf="!refresher">
+            Refresh
+          </a>
+          <ion-spinner color="danger" *ngIf="refresher" style="margin-top: 10px;margin-left:10px;"></ion-spinner>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-list>
+  
+  <ion-card style="border-radius: 8px;" *ngIf="this.data == 1">
+    <div class="card-body">                                  
+      <div class="table-responsive">
+          <table class="table table-bordered align-middle nowrap">
+              <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Account</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Credit</th>
+                    <th scope="col">Debit</th>
+                    <th scope="col">NetBalance</th>
+                    <th scope="col">Day</th>
+                    <th scope="col">Date</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let data of expensedetailbyday | filter: filterTerm;let i=index;">
+                      <th scope="row">{{i+1}} </th>
+                      <td>{{data.type}}</td>       
+                      <td>{{data.name}}</td>       
+                      <td>{{data.description}}</td>  
+                      <td>{{data.credit}} </td>         
+                      <td>{{data.debit}}</td> 
+                      <td>{{data.netbalance}}</td>  
+                      <td>{{data.day}}</td>  
+                      <td>{{data.t_date}} </td>  
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  </ion-card>
+
+  <ion-card style="border-radius: 8px;" *ngIf="this.data == 2">
+    <div class="card-body">
+                                        
+      <div class="table-responsive">
+          <table class="table table-bordered align-middle nowrap">
+              <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Account</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Credit</th>
+                    <th scope="col">Debit</th>
+                    <th scope="col">NetBalance</th>
+                    <th scope="col">Month</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Date</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let data of expensedetailbymonth | filter: filterTerm;let i=index;">
+                      <th scope="row">{{i+1}} </th>
+                      <td>{{data.type}}</td>       
+                      <td>{{data.name}}</td>       
+                      <td>{{data.description}}</td>  
+                      <td>{{data.credit}} </td>         
+                      <td>{{data.debit}}</td> 
+                      <td>{{data.netbalance}}</td>  
+                      <td>{{data.month}}</td>  
+                      <td>{{data.year}}</td>  
+                      <td>{{data.t_date}} </td>           
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  </ion-card>
+
+  <ion-card style="border-radius: 8px;" *ngIf="this.data == 3">
+    <div class="card-body">
+                                        
+      <div class="table-responsive">
+          <table class="table table-bordered align-middle nowrap">
+              <thead>
+                  <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Contact No</th>
+                      <th scope="col">Course</th>
+                      <th scope="col">Course Duration</th>
+                      <th scope="col">Advance Fee</th>
+                      <th scope="col">Total Fee</th>
+                      <th scope="col">Remaining Payment </th>
+                      <th scope="col">Total Installments</th>
+                      <th scope="col">Day</th>
+                      <th scope="col">Date</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let data of installmentdetailbyday | filter: filterTerm;let i=index;">
+                      <th scope="row">{{i+1}} </th>
+                      <td>{{data.name}}</td>       
+                      <td>{{data.contact_no}}</td>       
+                      <td>{{data.course}}</td>       
+                      <td>{{data.c_duration}}</td>                  
+                      <td>{{data.advance}}</td>          
+                      <td>{{data.total_fee}}</td>       
+                      <td>{{data.remaning_payment}}</td>       
+                      <td>{{data.installment_no}}</td>       
+                      <td>{{data.day}}</td>                  
+                      <td>{{data.date}}</td>          
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  </ion-card>
+
+  <ion-card style="border-radius: 8px;" *ngIf="this.data == 4">
+    <div class="card-body">
+                                        
+      <div class="table-responsive">
+          <table class="table table-bordered align-middle nowrap">
+              <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Contact No</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Course Duration</th>
+                    <th scope="col">Advance Fee</th>
+                    <th scope="col">Total Fee</th>
+                    <th scope="col">Remaining Payment </th>
+                    <th scope="col">Total Installments</th>
+                    <th scope="col">Month</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Date</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let data of installmentdetailbymonth | filter: filterTerm;let i=index;">
+                    <th scope="row">{{i+1}} </th>
+                    <td>{{data.name}}</td>       
+                    <td>{{data.contact_no}}</td>       
+                    <td>{{data.course}}</td>       
+                    <td>{{data.c_duration}}</td>                  
+                    <td>{{data.advance}}</td>          
+                    <td>{{data.total_fee}}</td>       
+                    <td>{{data.remaning_payment}}</td>       
+                    <td>{{data.installment_no}}</td>       
+                    <td>{{data.month}}</td>                  
+                    <td>{{data.year}}</td>                  
+                    <td>{{data.date}}</td>       
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  </ion-card>
+
+</ion-content>

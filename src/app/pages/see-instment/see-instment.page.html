@@ -1,0 +1,143 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios" class="py-2 px-2  header">
+
+    <ion-searchbar  slot="end" style="text-align: left;" [(ngModel)]="filterTerm" class="searchbar" type="animated"></ion-searchbar>
+
+    <ion-button fill="clear" color="light" (click)="home()" class="backbtn">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      Back
+    </ion-button>
+
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-icon class="buttonrefresh" name="menu-outline"></ion-icon>
+      </ion-menu-toggle>
+    </ion-buttons>
+
+    <ion-title class="pagetitle">
+     Monthly Installments
+    </ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list class="listheader2" style="margin-top: 10px;">
+    <div class="">
+      <ion-row>
+        <ion-col size-lg="10.9" size-md="10" size="12" class="colhome">
+          <div class="me-auto  d-lg-block">
+            <!-- <h2 class="text-black font-w600">Property</h2> -->
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active text1 " (click)="home()">Home</li>
+              <li class="breadcrumb-item li1 page">Monthly Installments</li>
+              <!-- <li class="breadcrumb-item" (click)="Plot()"><a class="plot">Plot</a></li>
+              <li class="breadcrumb-item" (click)="add_plot()"><a class="page">Add Plot</a></li> -->
+            </ol>
+          </div>
+        </ion-col>
+        <ion-col size-lg="1" size-md="1.7" size="" (click)="refresh()">
+          <a  class="btn btn-primary top refresh_button rounded primary1 light me-3" *ngIf="!refresher">Refresh</a>
+          <ion-spinner color="tertiary" name="circles" *ngIf="refresher" style="margin-top: 10px;margin-left:7px;"></ion-spinner>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-list>
+
+  
+  <ion-row>
+    <ion-col size-md="4" size="12"style="margin-left: auto;margin-right: auto;" >
+      <div class="form-head ion-margin ">
+        <div class="me-auto w-100">
+          <div class="d-flex flex-column">
+            <h2 class="text-black mx-3 mt-4 mb-1 font-w600 page-titles">{{this.total.length}}</h2>
+            <h2 class="text-black mx-3 mb-4 mt-1 fs-5 font-w800">Total Students</h2>
+          </div>
+        </div> 
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <div >
+    <ion-list class="selectlist">
+      <ion-item>
+        <ion-select  class="w-100" placeholder="Select Month"
+        (ionChange)="select_student_Data($event)" >
+          <ion-select-option value="all">All</ion-select-option>
+          <ion-select-option value="January">January</ion-select-option>
+          <ion-select-option value="February">February</ion-select-option>
+          <ion-select-option value="March">March</ion-select-option>
+          <ion-select-option value="April">April</ion-select-option>
+          <ion-select-option value="May">May</ion-select-option>
+          <ion-select-option value="June">June</ion-select-option>
+          <ion-select-option value="July">July</ion-select-option>
+          <ion-select-option value="August">August</ion-select-option>
+          <ion-select-option value="September">September</ion-select-option>
+          <ion-select-option value="October">October</ion-select-option>
+          <ion-select-option value="November">November</ion-select-option>
+          <ion-select-option value="December">December</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-card style="border-radius: 8px;">
+    <div class="card-body">
+                                        
+      <div class="table-responsive">
+          <table class="table table-bordered align-middle nowrap">
+              <thead>
+                  <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Student Name</th>
+                      <th scope="col">Gender</th>
+                      <th scope="col">Father Name</th>
+                      <th scope="col">Contact No</th>
+                      <th scope="col">Course</th>
+                      <th scope="col">Addmission Date</th>
+                      <th scope="col">Next Installment Date</th>
+                      <th scope="col">Remaining Fee</th>
+                      <th scope="col">Total Fee</th>
+                      <th scope="col">Monthly Installment</th>
+                      <th scope="col">Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+
+                  <tr *ngFor="let data of student_Installments | filter:filterTerm ;let i=index;">
+                      <th scope="row">{{i+1}} </th>
+                      <td>{{data.name}}</td>    
+                      <td>{{data.st_gender}}</td>       
+                      <td>{{data.f_name}}</td>       
+                      <td>{{data.contact_no}}</td>                  
+                      <td>{{data.course}}</td>       
+                      <td>{{data.ad_date}}</td>                
+                      <td>{{data.upcoming_installment}}</td>                
+                      <td>{{data.remaning_payment}}</td>                
+                      <td>{{data.total_fee}}</td>                
+                      <td>{{data.per_installment}}</td>                
+                      <td>
+                        <ul class="list-unstyled hstack gap-1 mb-0" >
+                          <li (click)="view_all_installment(data.id)">
+                            <a  class="btn btn-sm btn-soft-primary"><ion-icon class="icon" name="cash-outline"></ion-icon></a>
+                        </li>
+                          <!-- <li (click)="seeDeatils(data)">
+                              <a  class="btn btn-sm btn-soft-primary"><ion-icon class="icon" name="eye-outline"></ion-icon></a>
+                          </li> -->
+                          <!-- <li (click)="updateModal(data)">
+                              <a class="btn btn-sm btn-soft-info"><ion-icon class="icon" name="create-outline"></ion-icon></a>
+                          </li> -->
+                          <!-- <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" (click)="DeleteInstalments(data.i_id)">
+                              <a   data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><ion-icon class="icon" name="trash-outline"></ion-icon></a>
+                          </li> -->
+                      </ul>
+                      </td>        
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  </ion-card>
+
+</ion-content>

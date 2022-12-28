@@ -1,0 +1,233 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios" class="py-2 px-2  header">
+
+    <ion-searchbar  slot="end" style="text-align: left;" class="searchbar" type="animated"></ion-searchbar>
+
+    <!-- <ion-button fill="clear" color="light" (click)="home()" class="backinstallment">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      Back
+    </ion-button> -->
+
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-icon class="buttonrefresh" name="menu-outline"></ion-icon>
+      </ion-menu-toggle>
+    </ion-buttons>
+
+    <ion-title>
+     Home
+    </ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list class="listheader" style="margin-top: 10px;">
+    <div >
+      <ion-row>
+        <ion-col size-lg="10.7" size-md="10" size="12" class="colhome">
+          <div class="me-auto  d-lg-block">
+            <!-- <h2 class="text-black font-w600">Property</h2> -->
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active text1 " (click)="home()">Learn2Earn</li>
+              <li class="breadcrumb-item li1 page">(Professional Institute Of Computer Science & Software House)</li>
+            </ol>
+          </div>
+        </ion-col>
+        <ion-col size-lg="1" size-md="1.7" size=""  (click)="refresh()" style="margin-left: 5px;">
+          <a  class="btn btn-primary top2 refresh_button rounded primary1 light" *ngIf="!refresher">
+            Refresh
+          </a>
+          <ion-spinner color="tertiary" name="circles" *ngIf="refresher" style="margin-top: 10px;margin-left:10px;"></ion-spinner>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-list>
+
+
+  
+
+
+  <!-- <center class="center1">
+    <ion-card class="card2">
+      <ion-segment  (ionChange)="segmentChanged($event)" [(ngModel)]="picker" mode="ios">
+        <ion-segment-button value="from" id="open-fromDate-input" swipeGesture="true">
+          <ion-label>From Date</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="to" id="open-toDate-input" swipeGesture="true">
+          <ion-label>To Date</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <ion-popover trigger="open-fromDate-input" show-backdrop="false">
+        <ng-template>
+          <ion-datetime
+            #popoverDatetime
+            presentation="date"
+            (ionChange)="dateValue = formatDate(popoverDatetime.value)"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+      <ion-popover trigger="open-toDate-input" show-backdrop="false">
+        <ng-template>
+          <ion-datetime
+            #popoverDatetime
+            presentation="date"
+            (ionChange)="dateValue = todate(popoverDatetime.value)"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+
+    </ion-card>
+  </center> -->
+<!-- 
+  <ion-row>
+    <ion-col size-lg="6" size-md="6" size="12">
+      <ion-card class="card1">
+        Daily Expense
+        <div class="chart-container charter">
+          <canvas  id="MyChart" >{{ chart }}</canvas>
+        </div>
+      </ion-card>
+    </ion-col>
+    <ion-col size-lg="6" size-md="6" size="12">
+      <ion-card class="card1">
+        Monthly Expense
+        <div class="chart-container charter">
+          <canvas  id="MyExpenseChart2" >{{ chart }}</canvas>
+        </div>
+      </ion-card>
+    </ion-col>
+  </ion-row> -->
+
+  <ion-row>
+    <ion-col size-md="4" size="12" >
+      <div class="form-head ion-margin ">
+        <div class="me-auto w-100">
+          <div class="d-flex flex-column">
+            <h2 class="text-black mx-3 mt-4 mb-1 font-w600 page-titles">{{this.total}}</h2>
+            <h2 class="text-black mx-3 mb-4 mt-1 fs-5 font-w800">Total Students</h2>
+          </div>
+        </div> 
+      </div>
+    </ion-col>
+    <ion-col size-md="4" size="12">
+      <div class="form-head ion-margin ">
+        <div class="me-auto w-100">
+          <div class="d-flex flex-column">
+            <h2 class="text-black mx-3 mt-4 mb-1 font-w600 page-titles">{{this.activeCounter}}</h2>
+            <h2 class="text-black mx-3 mb-4 mt-1 fs-5 font-w800">Active Students</h2>
+          </div>
+        </div> 
+      </div>
+    </ion-col>
+    <ion-col size-md="4" size="12">
+      <div class="form-head ion-margin ">
+        <div class="me-auto w-100">
+          <div class="d-flex flex-column">
+            <h2 class="text-black mx-3 mt-4 mb-1 font-w600 page-titles">{{this.deactiveCounter}}</h2>
+            <h2 class="text-black mx-3 mb-4 mt-1 fs-5 font-w800">DeActive</h2>
+          </div>
+        </div> 
+      </div>
+    </ion-col>
+  </ion-row>
+
+
+  <div class="col-xl-12 col-xxl-12">
+    <div class="card ion-margin">
+      <ion-row>
+        <ion-col size-lg="4.4"  size-md="4.6" size="12">
+          <div class="card-header border-0 pb-0">
+            <span><h3 class="fs-20 text-black">Total NetBalance </h3><span class="fs-20 text-black font-w600 me-3"> </span></span>
+          </div>
+        </ion-col>
+        <ion-col size-lg="5.5"  size-md="4.8" size="6" (click)="One_ID()">
+          <ion-button fill="clear"   class="margin">
+            See Details <ion-icon class="icon" name="chevron-forward-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size-lg="1" size-md="2" size="6" (click)="Tow_ID()"  style="text-align: left;justify-content: left;">
+          <ion-button fill="clear" class="margin" >
+            See Details <ion-icon class="icon" name="chevron-forward-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <div class="card-body pt-2 pb-0">
+        <ion-row class="card-main">
+          <ion-col size-md="6" size-sm="12">
+            <p class="me-sm-auto me-3 mb-sm-0 mb-3">Daily</p>
+            <canvas  id="MyChart" ></canvas>
+          </ion-col>
+          <ion-col size-md="6" size-sm="12">
+            <p class="me-sm-auto me-3 mb-sm-0 mb-3">Monthly</p>
+            <canvas id="MyExpenseChart2" ></canvas>
+          </ion-col>
+        </ion-row>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-12 col-xxl-12">
+    <div class="card ion-margin">
+      <ion-row>
+        <ion-col size-lg="4.4"  size-md="4.5"  size="12">
+          <div class="card-header border-0 pb-0">
+            <span><h3 class="fs-20 text-black">Total Installments </h3><span class="fs-20 text-black font-w600 me-3"> </span></span>
+          </div>
+        </ion-col>
+        <ion-col size-lg="5.5" size-md="4.8" size="6">
+          <ion-button fill="clear" class="margin" (click)="three_ID()">
+            See Details <ion-icon class="icon" name="chevron-forward-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size-lg="1" size-md="2" size="6" style="text-align: left;justify-content: left;">
+          <ion-button fill="clear"  class="margin" (click)="four_ID()">
+            See Details <ion-icon class="icon" name="chevron-forward-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <div class="card-body pt-2 pb-0">
+        <ion-row class="card-main">
+          <ion-col size-md="6" size-sm="12">
+            <p class="me-sm-auto me-3 mb-sm-0 mb-3">Daily</p>
+            <canvas  id="MyChart3" ></canvas>
+          </ion-col>
+          <ion-col size-md="6" size-sm="12">
+            <p class="me-sm-auto me-3 mb-sm-0 mb-3">Monthly</p>
+            <canvas id="MonthChartInstallments" ></canvas>
+          </ion-col>
+        </ion-row>
+
+      </div>
+    </div>
+  </div>
+
+  <ion-row>
+    <!-- <ion-col size-lg="6" size-md="6" size="12">
+      <ion-card class="card1">
+        <div class="chart-container charter2" >
+          <canvas id="MyChart3"> {{chart3}} </canvas>
+         </div>
+      </ion-card>
+    </ion-col> -->
+
+    <!-- <ion-col size-lg="6" size-md="6" size="12">
+      <ion-card class="card1">
+        <div class="chart-container charter2" >
+          <canvas id="MyChart3"> {{chart3}} </canvas>
+         </div>
+      </ion-card>
+    </ion-col> -->
+
+    <!-- <ion-col  size-lg="6" size-md="6" size="12">
+      <ion-card class="card1">
+        <div class="chart-container div2 charter3">
+          <canvas id="MyChart8"> {{chart8}} </canvas>
+         </div>
+      </ion-card>
+    </ion-col> -->
+  </ion-row>
+
+</ion-content>

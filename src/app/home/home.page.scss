@@ -1,0 +1,158 @@
+ion-segment {
+    width: 150px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .dateDisplayText {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+  }
+  .fromDate {
+    width: 120px;
+    border-bottom: 2px solid var(--ion-color-primary);
+  }
+  .dateDash {
+    width: 40px;
+  }
+  .toDate {
+    width: 120px;
+    border-bottom: 2px solid var(--ion-color-primary);
+  }
+  ion-datetime {
+    --title-color: var(--ion-color-primary);
+    color: var(--ion-color-primary-text);
+    button {
+    color: var(--ion-color-primary-text);
+    }
+  }
+
+  // graph data
+  .card-header {
+    background: none;
+
+  }
+
+  @media (min-width:1px) and (max-width:600px) {
+    .card{
+      // height: 340px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+  }
+  @media (min-width:601px){
+    .card{
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      height: 400px;
+    }
+  }
+  @media (min-width:1px) and (max-width:600px) {
+    .margin{
+      // margin-top: 21px;
+      --border-radius: 7px;
+      text-transform: none;
+      font-size: 14px;
+      text-decoration: none;
+      --background-hover-opacity:0px;
+      --background-hover:0px
+    }
+  }
+  @media (min-width:601px) {
+    .margin{
+      margin-top: 21px;
+      --border-radius: 7px;
+      text-transform: none;
+      font-size: 17px;
+      text-decoration: none;
+      --background-hover-opacity:0px;
+      --background-hover:0px
+    }
+  }
+  
+  @media (min-width:1px) and (max-width:768px) {
+    .charter{
+      position: relative;
+      height:10vh;
+       width:100%;
+     }
+  }
+  @media (min-width:769px) {
+    .charter{
+      position: relative;
+      height:10vh;
+       width:80vh;
+     }
+  }
+  @media (min-width:1px) and (max-width:768px) {
+    .card1{
+      height: 185px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+  }
+  @media (min-width:769px) {
+    .card1{
+      height: 280px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+  }
+  .div2{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .charter2{
+    height:10vh;
+    width:100%;
+  }
+  .charter3{
+    position: relative; 
+    height:4vh;
+    width:43vh;
+  }
+
+  .form-head {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    height: 103px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+// .icon{
+//   width: 40px;
+// }
+.card2{
+  // margin-left: 20px;
+  // margin-right: 20px;
+  // border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.center1{
+  padding: 5px;
+}
+
+  .button2{
+    // margin-left: 10px;
+    --border-radius: 7px;
+    text-transform: none;
+    margin-bottom: 10px;
+    font-size: 17px;
+    --background-hover-opacity:0px;
+    --background-hover:0px;
+    margin-top: 10px;
+  }
+  .card3{
+    box-shadow: none;
+    margin: 18px;
+    border-radius: 11px;
+    padding: 20px;
+    h2{
+      font-weight: 600;
+      color: rgba(var(--bs-black-rgb),var(--bs-text-opacity))!important;
+    }
+}
+
+.seedetailBtn{
+  display: flex;
+   justify-content: space-between;
+    align-items: center;
+}

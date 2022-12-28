@@ -1,0 +1,193 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios" class="py-2 px-2  header">
+
+    <ion-searchbar  slot="end" style="text-align: left;" [(ngModel)]="filterTerm"  class="searchbar" type="animated"></ion-searchbar>
+
+    <ion-button fill="clear" color="light" (click)="home()" class="backbtn">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      Back
+    </ion-button>
+
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-icon class="buttonrefresh" name="menu-outline"></ion-icon>
+      </ion-menu-toggle>
+    </ion-buttons>
+
+    <ion-title class="pagetitle">
+     See Account
+    </ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-list class="listheader2" style="margin-top: 10px;">
+    <div class="">
+      <ion-row>
+        <ion-col size-lg="10.9" size-md="10" size="12" class="colhome">
+          <div class="me-auto  d-lg-block">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active text1 " (click)="home()">Home</li>
+              <li class="breadcrumb-item li1 page">See Account</li>
+            </ol>
+          </div>
+        </ion-col>
+        <ion-col size-lg="1" size-md="1.7" size="" (click)=" refresh()">
+          <a  class="btn btn-primary top rounded refresh_button primary1 light me-3" *ngIf="!refresher">
+            Refresh
+          </a>
+          <ion-spinner color="tertiary" name="circles" *ngIf="refresher" style="margin-top: 10px;margin-left:20px;"></ion-spinner>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-list>
+
+  <ion-row>
+    <div class="form-head2 ion-margin " *ngFor="let netb of net_b">
+      <div class="me-auto w-100">
+        <div class="d-flex flex-column">
+          <h2 class="text-black mx-3 mt-4 mb-1 font-w600 page-titles">Rs.{{this.netb.netbalance}} </h2>
+          <h2 class="text-black mx-3 mb-4 mt-1 fs-5 font-w800">{{this.netb.name}} Total Net Balance</h2>
+        </div>
+      </div> 
+    </div>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size-md="4" size="12">
+      <div class="form-head ion-margin ">
+        <div class="me-auto w-100">
+          <div class="d-flex flex-column">
+            <h2 class="text-black mx-3 mt-4 mb-1 font-w600 page-titles">Rs.{{this.totalnetBalance.netbalance}} </h2>
+            <h2 class="text-black mx-3 mb-4 mt-1 fs-5 font-w800">Net Balance</h2>
+          </div>
+        </div> 
+      </div>
+    </ion-col>
+    <ion-col size-md="4" size="12" >
+      <div class="form-head ion-margin ">
+        <div class="me-auto w-100">
+          <div class="d-flex flex-column">
+            <h2 class="text-black mx-3 mt-4 mb-1 font-w600 page-titles">Rs.{{this.totalCredit.total_credit}}</h2>
+            <h2 class="text-black mx-3 mb-4 mt-1 fs-5 font-w800">Credit Balance</h2>
+          </div>
+        </div> 
+      </div>
+    </ion-col>
+    <ion-col size-md="4" size="12">
+      <div class="form-head ion-margin ">
+        <div class="me-auto w-100">
+          <div class="d-flex flex-column">
+            <h2 class="text-black mx-3 mt-4 mb-1 font-w600 page-titles">Rs.{{this.totalDebit.total_debit}}</h2>
+            <h2 class="text-black mx-3 mb-4 mt-1 fs-5 font-w800">Debit Balance</h2>
+          </div>
+        </div> 
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <!-- <ion-list class="center1">
+    <ion-card class="card2">
+      <ion-segment   mode="ios">
+        <ion-segment-button value="from" id="open-fromDate-input" swipeGesture="true">
+          <ion-label>From Date</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="to" id="open-toDate-input" swipeGesture="true">
+          <ion-label>To Date</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <ion-popover trigger="open-fromDate-input"show-backdrop="false">
+        <ng-template>
+          <ion-datetime
+            
+            presentation="date"
+            (ionChange)="formatDate($event)"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+      <ion-popover trigger="open-toDate-input"  show-backdrop="false">
+        <ng-template>
+          <ion-datetime
+           
+            presentation="date"
+            (ionChange)="todate($event)"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-card>
+  </ion-list> -->
+
+  <!-- selector -->
+  <div >
+    <ion-card class="card2">
+      <ion-row>
+       <ion-col size-lg="6" size="12">
+        <div class="form-group">
+          <ion-select mode="ios"  interface="action-sheet" [(ngModel)]="slectName" placeholder="Select From"  (ionChange)="selectFrom($event)">
+            <ion-select-option *ngFor="let acct of accts" value="{{acct.a_id}}">{{acct.name}}</ion-select-option>
+          </ion-select>
+        </div>
+       </ion-col>
+       <ion-col size-lg="6" size="12">
+        <div class="form-group">
+          <ion-select mode="ios"  interface="action-sheet" placeholder="Select type" [(ngModel)]="slectType" (ionChange)="selectTypeTransaction($event)">
+            <ion-select-option value ="transaction">Transaction</ion-select-option> 
+            <ion-select-option value ="installment">Installments</ion-select-option> 
+            <ion-select-option value ="addmission">Addmission</ion-select-option> 
+            <ion-select-option value ="expense">Expense</ion-select-option>               
+          </ion-select>
+        </div>
+       </ion-col>
+       <ion-col size-lg="6" size="12" *ngIf="this.type == 'expense'">
+        <div class="form-group">
+          <ion-select mode="ios" (click)="getby_description()"  interface="action-sheet" [(ngModel)]="slectSource" placeholder="Sub Expense" (ionChange)="getbyExpense($event)" >
+            <ion-select-option *ngFor="let des of desc">{{des.description}}</ion-select-option>
+            <!-- <ion-select-option value="Electricity Bill">Electricity Bill</ion-select-option>
+            <ion-select-option value="PTCL Bill Institute">PTCL Bill Institute</ion-select-option>
+            <ion-select-option value="PTCL Bill Software House">PTCL Bill Software House</ion-select-option>
+            <ion-select-option value="UPS Kist">UPS Kist</ion-select-option>
+            <ion-select-option value="Trust">Trust</ion-select-option>
+            <ion-select-option value="Other">Other</ion-select-option> -->
+          </ion-select>
+        </div>
+       </ion-col>
+      </ion-row>
+     </ion-card>
+  </div>
+
+  <ion-card style="border-radius: 8px;">
+    <div class="card-body">
+                                        
+      <div class="table-responsive">
+          <table class="table table-bordered align-middle nowrap">
+              <thead>
+                  <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Account</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Credit</th>
+                      <th scope="col">Debit</th>
+                      <th scope="col">NetBalance</th>
+                      <th scope="col">Date</th>
+                  </tr>
+              </thead>
+              <tbody >
+                  <tr  *ngFor="let data of Account_details |  filter:filterTerm; let i=index;" >
+                      <th scope="row">{{i+1}}</th>
+                      <td>{{data.type}}</td>       
+                      <td>{{data.name}}</td>       
+                      <td>{{data.description}}</td>  
+                      <td>{{data.credit}} </td>         
+                      <td>{{data.debit}}</td> 
+                      <td>{{data.netbalance}}</td>  
+                      <td>{{data.t_date}} </td>         
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  </ion-card>
+
+</ion-content>

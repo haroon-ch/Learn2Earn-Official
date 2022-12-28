@@ -1,0 +1,86 @@
+<ion-content>
+
+  
+    
+    <div class="account-pages my-2 pt-sm-2" style="padding: 5px;height: 100px;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card overflow-hidden">
+                        <div class="bg-primary bg-soft">
+                            <div class="row">
+                                <div class="col-7">
+                                    <div class="text-primary p-4">
+                                        <h5 class="text-primary">Welcome!</h5>
+                                        <p>Login to continue with Learn2earn</p>
+                                    </div>
+                                </div>
+                                <div class="col-5 align-self-end">
+                                    <img src="./../../../assets/icon/l2e.png" alt="" class="img-fluid" style="margin-bottom: 10px;height: 117px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0"> 
+                            <div class="auth-logo">
+                                <a  class="auth-logo-dark">
+                                    <div class="avatar-md profile-user-wid mb-4">
+                                        <span class="avatar-title rounded-circle bg-light">
+                                            <img src="../../../assets/icon/images.jpg" alt="" class="rounded-circle">
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="p-2" style="margin-top: -10px;">
+                                <form class="form-horizontal" #form="ngForm" (ngSubmit)="login(form)">
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        <ion-input type="text"  [(ngModel)]="login_data.username" [ngModelOptions]="{standalone: true}" class="form-control" required placeholder="Enter username"></ion-input>
+                                    </div>
+            
+                                    <div class="mb-3">
+                                        <label class="form-label">Password</label>
+                                        <div class="input-group auth-pass-inputgroup">
+                                            <ion-input type="password"  [(ngModel)]="login_data.password" [ngModelOptions]="{standalone: true}" required class="form-control" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon"></ion-input>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Role</label>
+                                            <ion-select mode="ios"  interface="action-sheet" class="w-100" [(ngModel)]="login_data.role" [ngModelOptions]="{standalone: true}" required  placeholder="Select Role">
+                                                <ion-select-option value="ceo">CEO</ion-select-option>
+                                              <ion-select-option value="admin">Admin</ion-select-option>
+                                              <ion-select-option value="employ">Partners</ion-select-option>
+
+                                            </ion-select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Campus</label>
+                                            <ion-select mode="ios"  interface="action-sheet" class="w-100" [(ngModel)]="login_data.c_id" [ngModelOptions]="{standalone: true}" required  placeholder="Select Campus">
+                                                <ion-select-option value="3">CEO</ion-select-option>
+                                              <ion-select-option value="1">Pakpattan</ion-select-option>
+                                              <ion-select-option value="2">Arifwala</ion-select-option>
+                                            </ion-select>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 d-grid">
+                                        <button class="btn btn-primary waves-effect waves-light" (click)="login()" type="submit">Log In</button>
+                                    </div>
+                                </form>
+                            </div>
+        
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+
+
+
+</ion-content>

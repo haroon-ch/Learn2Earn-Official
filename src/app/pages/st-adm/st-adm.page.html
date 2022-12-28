@@ -1,0 +1,160 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios" class="py-2 px-2  header">
+
+    <ion-searchbar  slot="end" style="text-align: left;" class="searchbar" type="animated"></ion-searchbar>
+
+    <ion-button fill="clear" color="light" (click)="home()" class="backbtn">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      Back
+    </ion-button>
+
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-icon class="buttonrefresh" name="menu-outline"></ion-icon>
+      </ion-menu-toggle>
+    </ion-buttons>
+
+    <ion-title class="pagetitle">
+     Add Students
+    </ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-list class="listheader3" style="margin-top: 10px;">
+    <div class="">
+      <ion-row>
+        <ion-col   size="12">
+          <div class="me-auto  d-lg-block">
+            <!-- <h2 class="text-black font-w600">Property</h2> -->
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active text1 " (click)="home()">Home</li>
+              <li class="breadcrumb-item li1 page" (click)="add_student()">Add Students</li>
+              <!-- <li class="breadcrumb-item" (click)="Plot()"><a class="plot">Plot</a></li>
+              <li class="breadcrumb-item" (click)="add_plot()"><a class="page">Add Plot</a></li> -->
+            </ol>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-list>
+
+<ion-card >
+<ion-row>
+  <ion-col size-lg="6" size-md="6" size="12">
+    <div class="mb-2 form-group">
+      <label class="label1">Student Name</label>
+      <ion-input type="text" [(ngModel)]="student_data.name" class="form-control" placeholder="Enter student name" required></ion-input>
+   </div>
+  </ion-col>
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="text-label label1">Student Gender</label>
+      <ion-select [(ngModel)]="student_data.st_gender"  mode="ios" interface="action-sheet" placeholder="Select course">
+        <ion-select-option value="Male">Male</ion-select-option>
+        <ion-select-option value="Female">Female</ion-select-option>
+      </ion-select>
+    </div>
+  </ion-col>
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="label1">Father Name</label>
+      <ion-input type="text" [(ngModel)]="student_data.f_name"  class="form-control" placeholder="Enter father name" required></ion-input>
+    </div>
+  </ion-col>
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="label1">Contact number</label>
+      <ion-input type="number" [(ngModel)]="student_data.contact_no"  class="form-control" placeholder="Enter contact number" required></ion-input>
+    </div>
+  </ion-col>
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="label1">Address</label>
+      <ion-input type="text" [(ngModel)]="student_data.address"  class="form-control" placeholder="Enter address" required></ion-input>
+    </div>
+  </ion-col>
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="label1">Reference</label>
+      <ion-input type="text" [(ngModel)]="student_data.reference"  class="form-control" placeholder="Enter name" required></ion-input>
+    </div>
+  </ion-col>
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="label1">CNIC</label>
+      <ion-input type="number" [(ngModel)]="student_data.cnic"  class="form-control" placeholder="Enter cnic" required></ion-input>
+    </div>
+  </ion-col>
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="label1">Total Fee</label>
+      <ion-input type="number"  [(ngModel)]="student_data.total_fee" class="form-control" placeholder="Enter total fee" required></ion-input>
+    </div>
+  </ion-col>
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="text-label label1">Course</label>
+      <ion-select [(ngModel)]="student_data.course"  mode="ios" interface="action-sheet" placeholder="Select course">
+        <ion-select-option value="Full Stack Development">Full Stack Development</ion-select-option>
+        <ion-select-option value="Web Development">Web Development</ion-select-option>
+        <ion-select-option value="Mobile App Development">Mobile App Development</ion-select-option>
+        <ion-select-option value="Graphic Designing">Graphic Designing</ion-select-option>
+      </ion-select>
+    </div>
+  </ion-col>
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="text-label label1">Course Duration</label>
+      <ion-select [(ngModel)]="student_data.c_duration"  mode="ios" interface="action-sheet" placeholder="Select course duration">
+        <ion-select-option value="1 Month">1 Month</ion-select-option>
+        <ion-select-option value="2 Month">2 Month</ion-select-option>
+        <ion-select-option value="3 Month">3 Month</ion-select-option>
+        <ion-select-option value="6 Month">6 Month</ion-select-option>
+      </ion-select>
+    </div>
+  </ion-col>
+
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="label1">Addmission Date</label>
+      <ion-input type="date"  [(ngModel)]="student_data.ad_date" class="form-control"  (ionChange)="month($event)" required></ion-input>
+    </div>
+  </ion-col>
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="label1">Next Installment Date</label>
+      <ion-input type="date"  [(ngModel)]="student_data.upcoming_installment" class="form-control"  required></ion-input>
+    </div>
+  </ion-col>
+
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="label1">Advance Fee</label>
+      <ion-input type="number"  [(ngModel)]="student_data.advance" class="form-control"  (ionChange)="installment($event)" placeholder="Enter advance fee" required></ion-input>
+    </div>
+  </ion-col>
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="label1">Remaining Fee</label>
+      <ion-input type="number" readonly="true" [(ngModel)]="student_data.remaning_amount" class="form-control"  placeholder="Enter remaining fee" required></ion-input>
+    </div>
+  </ion-col>
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="label1">Total Installments</label>
+      <ion-input type="number"  [(ngModel)]="student_data.installment_no" class="form-control" (ionChange)="perinstallment($event)" placeholder="Enter total installments" required></ion-input>
+    </div>
+  </ion-col>
+  <ion-col size-lg="6" size-md="6"  size="12">
+    <div class="mb-2 form-group">
+      <label class="label1">Per Installment</label>
+      <ion-input type="number" readonly="true"  [(ngModel)]="student_data.per_installment" class="form-control"  required></ion-input>
+    </div>
+  </ion-col>
+</ion-row>
+<ion-button expand="block" color="tertiary" class="button2" (click)="Submit_Data()">Submit</ion-button>
+</ion-card>
+
+</ion-content>
